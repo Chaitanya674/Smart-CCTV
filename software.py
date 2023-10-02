@@ -46,6 +46,10 @@ class MyVideoCapture:
         while self.vid.isOpened and self.running:
             time.sleep(0.5)
             _, frame = self.vid.read()
+            
+            if frame is None:
+                continue
+            
             resized_frame = cv2.resize(frame , (64, 64))
             normalized_frame= resized_frame / 255
             frames.append(normalized_frame)
@@ -199,7 +203,7 @@ class App:
     def submit(self):
         name = self.name_var.get()
         link = self.link_var.get()
-        new_vid = (name, int(link))
+        new_vid = (name, link)
         self.vid_sources.append(new_vid)
         columns = 3
         self.vids.clear
