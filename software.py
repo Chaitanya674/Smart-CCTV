@@ -54,7 +54,7 @@ class MyVideoCapture:
                 result  = self.model.predict(test_features)
                 frames = []
                 print(result)
-                if result[0][0] < 0.5 and result[0][1] > 9.0: 
+                if result[0][0] <= 0.5 or result[0][1] >= 9.0: 
                     pywhatkit.sendwhatmsg(f"+91{self.phone}" , "Violence detected" , time_hour= datetime.datetime.now().hour,time_min= datetime.datetime.now().minute + 1, tab_close=True)
                     violence_img = PIL.Image.fromarray(frame)
                     violence_img.save(f"Images/frame-{i}.png")
